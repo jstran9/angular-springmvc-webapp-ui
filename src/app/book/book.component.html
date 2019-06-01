@@ -1,1 +1,17 @@
 <h1>Welcome to BookApi</h1>
+<div>
+  <table border="1">
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Actions</th>
+    </tr>
+    <tr *ngFor="let book of books">
+      <td>{{book.id}}</td>
+      <td>{{book.title}}</td>
+      <td>{{book.author}}</td>
+      <td>Edit | Delete (To be Implemented)</td>
+    </tr>
+  </table>
+</div>
