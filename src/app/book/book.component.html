@@ -1,4 +1,13 @@
 <h1>Welcome to BookApi</h1>
+
+<div>
+  <form>
+    Enter title: <input type="text" [(ngModel)]="book.title" name="title"/> <br/>
+    Enter Author: <input type="text" [(ngModel)]="book.author" name="author"/> <br/>
+    <button (click)="addBook()">Add Book</button>
+  </form>
+</div>
+
 <div>
   <table border="1">
     <tr>
