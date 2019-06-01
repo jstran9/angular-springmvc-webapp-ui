@@ -7,7 +7,7 @@ import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class BookService {
-  private API_BASE_URL = `http://localhost:8080/api/`;
+  private API_BASE_URL = `http://localhost:8080/bookapi_war/api/`;
   private GET_ALL_BOOKS = `${this.API_BASE_URL}books`;
 
   /*
