@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from './book';
 import { BookService } from './book.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-book',
@@ -52,6 +53,16 @@ export class BookComponent implements OnInit {
     this.bookService.deleteBook(bookId)
       .subscribe((response) => {
         console.log(response);
+        this.getBooks();
+      }, (error) => {
+        console.log(error);
+      });
+  }
+
+  getBookById(bookId: string) {
+    this.bookService.getBookById(bookId)
+      .subscribe((bookData) => {
+        this.book = bookData;
         this.getBooks();
       }, (error) => {
         console.log(error);
