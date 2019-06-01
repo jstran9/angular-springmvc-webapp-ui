@@ -10,6 +10,7 @@ import { BookService } from './book.service';
 export class BookComponent implements OnInit {
 
   books: Book[];
+  book = new Book();
   constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
@@ -25,6 +26,15 @@ export class BookComponent implements OnInit {
       .subscribe((bookData) => {
           this.books = bookData,
             console.log(bookData);
+      }, (error) => {
+        console.log(error);
+      });
+  }
+
+  addBook(): void {
+    this.bookService.addBook(this.book)
+      .subscribe((response) => {
+        console.log(response);
       }, (error) => {
         console.log(error);
       });
