@@ -5,7 +5,9 @@ import { Book } from './book';
 import { catchError, map } from 'rxjs/operators';
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class BookService {
   private API_BASE_URL = `http://localhost:8080/bookapi_war/api/`;
   private GET_ALL_BOOKS = `${this.API_BASE_URL}books`;
@@ -29,12 +31,10 @@ export class BookService {
   }
 
   addBook(book: Book) {
-    const body = JSON.stringify(book);
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
+      'responseType': 'text'
     };
-    return this.httpClient.post<Book>(this.CREATE_BOOK, body, httpOptions);
+    // @ts-ignore
+    return this.httpClient.post<Book>(this.CREATE_BOOK, book, httpOptions);
   }
 }
