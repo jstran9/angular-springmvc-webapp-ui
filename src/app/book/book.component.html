@@ -2,6 +2,7 @@
 
 <div>
   <form>
+    <input type="hidden" name="book.id"/>
     Enter title: <input type="text" [(ngModel)]="book.title" name="title"/> <br/>
     Enter Author: <input type="text" [(ngModel)]="book.author" name="author"/> <br/>
     <button (click)="addBook()">Add Book</button>
