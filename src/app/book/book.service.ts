@@ -12,6 +12,7 @@ export class BookService {
   private API_BASE_URL = `http://localhost:8080/bookapi_war/api/`;
   private GET_ALL_BOOKS = `${this.API_BASE_URL}books`;
   private CREATE_BOOK = `${this.API_BASE_URL}book`;
+  private DELETE_BOOK = `${this.API_BASE_URL}book/`;
 
   /*
    * dependency injection used here
@@ -36,5 +37,13 @@ export class BookService {
     };
     // @ts-ignore
     return this.httpClient.post<Book>(this.CREATE_BOOK, book, httpOptions);
+  }
+
+  deleteBook(bookId: string) {
+    const httpOptions = {
+      'responseType': 'text'
+    };
+    // @ts-ignore
+    return this.httpClient.delete(`${this.DELETE_BOOK}${bookId}`, httpOptions);
   }
 }
