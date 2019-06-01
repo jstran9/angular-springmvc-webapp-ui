@@ -9,6 +9,7 @@ import { catchError, map } from 'rxjs/operators';
 export class BookService {
   private API_BASE_URL = `http://localhost:8080/bookapi_war/api/`;
   private GET_ALL_BOOKS = `${this.API_BASE_URL}books`;
+  private CREATE_BOOK = `${this.API_BASE_URL}book`;
 
   /*
    * dependency injection used here
@@ -25,5 +26,15 @@ export class BookService {
 
   private handleError(error: HttpResponse<any>) {
     return Observable.throw(error);
+  }
+
+  addBook(book: Book) {
+    const body = JSON.stringify(book);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    return this.httpClient.post<Book>(this.CREATE_BOOK, body, httpOptions);
   }
 }
