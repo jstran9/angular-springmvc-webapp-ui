@@ -35,8 +35,16 @@ export class BookComponent implements OnInit {
     this.bookService.addBook(this.book)
       .subscribe((response) => {
         console.log(response);
+        this.reset();
+        this.getBooks(); // refresh the table on our view.
       }, (error) => {
         console.log(error);
       });
+  }
+
+  private reset() {
+    this.book.id = null;
+    this.book.title = null;
+    this.book.author = null;
   }
 }
