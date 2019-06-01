@@ -13,6 +13,7 @@ export class BookService {
   private GET_ALL_BOOKS = `${this.API_BASE_URL}books`;
   private CREATE_BOOK = `${this.API_BASE_URL}book`;
   private DELETE_BOOK = `${this.API_BASE_URL}book/`;
+  private GET_BOOK = `${this.API_BASE_URL}book/`;
 
   /*
    * dependency injection used here
@@ -45,5 +46,12 @@ export class BookService {
     };
     // @ts-ignore
     return this.httpClient.delete(`${this.DELETE_BOOK}${bookId}`, httpOptions);
+  }
+
+  getBookById(bookId: string): Observable<Book> {
+    return this.httpClient.get<Book>(`${this.GET_BOOK}${bookId}`).pipe(
+      map(response => response),
+      catchError(this.handleError)
+    );
   }
 }
