@@ -51,7 +51,7 @@ export class BookService {
       'responseType': 'text'
     };
     // @ts-ignore
-    return this.httpClient.delete(`${this.DELETE_BOOK}${bookId}`, httpOptions);
+    return this.httpClient.delete(`${this.API_SINGLE_BOOK}${bookId}`, httpOptions);
   }
 
   getBookById(bookId: string): Observable<Book> {
