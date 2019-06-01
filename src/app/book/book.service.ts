@@ -10,10 +10,9 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class BookService {
   private API_BASE_URL = `http://localhost:8080/bookapi_war/api/`;
+  private API_SINGLE_BOOK = `${this.API_BASE_URL}book/`;
   private GET_ALL_BOOKS = `${this.API_BASE_URL}books`;
   private CREATE_BOOK = `${this.API_BASE_URL}book`;
-  private DELETE_BOOK = `${this.API_BASE_URL}book/`;
-  private GET_BOOK = `${this.API_BASE_URL}book/`;
 
   /*
    * dependency injection used here
@@ -36,8 +35,15 @@ export class BookService {
     const httpOptions = {
       'responseType': 'text'
     };
-    // @ts-ignore
-    return this.httpClient.post<Book>(this.CREATE_BOOK, book, httpOptions);
+    if (book.id) {
+      // if we have a book ID then we know we are attempting to update an existing book.
+      // @ts-ignore
+      return this.httpClient.put(`${this.API_SINGLE_BOOK}${book.id}`, book, httpOptions);
+    } else {
+      // if we don't have a book ID then just simply POST and create a new book.
+      // @ts-ignore
+      return this.httpClient.post<Book>(this.CREATE_BOOK, book, httpOptions);
+    }
   }
 
   deleteBook(bookId: string) {
@@ -49,7 +55,7 @@ export class BookService {
   }
 
   getBookById(bookId: string): Observable<Book> {
-    return this.httpClient.get<Book>(`${this.GET_BOOK}${bookId}`).pipe(
+    return this.httpClient.get<Book>(`${this.API_SINGLE_BOOK}${bookId}`).pipe(
       map(response => response),
       catchError(this.handleError)
     );
